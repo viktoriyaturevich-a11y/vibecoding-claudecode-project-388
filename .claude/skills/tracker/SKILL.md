@@ -9,17 +9,17 @@ description: Обходит заранее заданный список URL т�
 
 Одна фраза: **«запусти трекер»**. Список ссылок вводить не нужно — он зашит ниже.
 
-## Список URL
+## Список URL (название товара — ссылка)
 
-1. https://www.dermstore.com/p/alterna-caviar-anti-aging-replenishing-moisture-conditioner-8.5oz/11524820/
-2. https://www.dermstore.com/p/alterna-caviar-anti-aging-replenishing-moisture-hair-masque-183ml/15463719/
-3. https://www.dermstore.com/p/alterna-caviar-anti-aging-replenishing-moisture-shampoo-8.5oz/11286094/
-4. https://www.ulta.com/p/caviar-anti-aging-replenishing-moisture-shampoo-xlsImpprod540446?sku=2143390
-5. https://www.ulta.com/p/caviar-anti-aging-replenishing-moisture-conditioner-xlsImpprod540378?sku=2143392
-6. https://www.ulta.com/p/caviar-anti-aging-replenishing-moisture-hair-masque-pimprod2046745?sku=2628720
-7. https://www.lookfantastic.com/p/living-proof-perfect-hair-day-shampoo-236ml/15914075/
-8. https://www.lookfantastic.com/p/living-proof-perfect-hair-day-conditioner-236ml/15914077/
-9. https://www.lookfantastic.com/p/living-proof-moisture-rescue-mask-236ml/17616430/
+1. Alterna Caviar Conditioner 8.5oz (Dermstore) — https://www.dermstore.com/p/alterna-caviar-anti-aging-replenishing-moisture-conditioner-8.5oz/11524820/
+2. Alterna Caviar Hair Masque 183ml (Dermstore) — https://www.dermstore.com/p/alterna-caviar-anti-aging-replenishing-moisture-hair-masque-183ml/15463719/
+3. Alterna Caviar Shampoo 8.5oz (Dermstore) — https://www.dermstore.com/p/alterna-caviar-anti-aging-replenishing-moisture-shampoo-8.5oz/11286094/
+4. Alterna Caviar Shampoo (Ulta) — https://www.ulta.com/p/caviar-anti-aging-replenishing-moisture-shampoo-xlsImpprod540446?sku=2143390
+5. Alterna Caviar Conditioner (Ulta) — https://www.ulta.com/p/caviar-anti-aging-replenishing-moisture-conditioner-xlsImpprod540378?sku=2143392
+6. Alterna Caviar Hair Masque (Ulta) — https://www.ulta.com/p/caviar-anti-aging-replenishing-moisture-hair-masque-pimprod2046745?sku=2628720
+7. Living Proof Perfect Hair Day Shampoo 236ml (Lookfantastic) — https://www.lookfantastic.com/p/living-proof-perfect-hair-day-shampoo-236ml/15914075/
+8. Living Proof Perfect Hair Day Conditioner 236ml (Lookfantastic) — https://www.lookfantastic.com/p/living-proof-perfect-hair-day-conditioner-236ml/15914077/
+9. Living Proof Moisture Rescue Mask 236ml (Lookfantastic) — https://www.lookfantastic.com/p/living-proof-moisture-rescue-mask-236ml/17616430/
 
 ## Сценарий
 
@@ -46,20 +46,22 @@ description: Обходит заранее заданный список URL т�
 3. **Примени правила значимости** из файла `KNOWLEDGE.md` (лежит рядом с этим файлом). Отбрось все незначимые изменения (колебания цены меньше порога и т. п.).
 4. **Выведи одну итоговую таблицу только со значимыми изменениями.** В неё попадают только товары, у которых есть значимое изменение; остальные строки не показывай. Колонки:
 
-   | url | regular_price | sale_price | promo_code | Результат |
+   | Товар | Обычная цена | Цена со скидкой | Промокод | Результат |
    |---|---|---|---|---|
 
-   - `regular_price`, `sale_price`, `promo_code` — **текущие** значения товара из нового прогона (прочерк `—`, если значения нет).
+   - `Товар` — название товара из списка выше **в виде ссылки** на его страницу: `[Название](URL)`. Сам URL в ячейке не показывай.
+   - `Обычная цена`, `Цена со скидкой`, `Промокод` — **текущие** значения из нового прогона (прочерк `—`, если значения нет).
    - `Результат` — только разница в цене со стрелкой по правилам `KNOWLEDGE.md` (раздел «Формат результата»): подорожало — `↑ $2.00`, подешевело — `↓ $0.70`. Для событий без разницы цены (`back in stock`, `sold out`, промокод) — короткая пометка.
    - Если значимых изменений нет — напиши «Значимых изменений нет».
    - Если это первый запуск — выведи полную таблицу прогона, а в колонке `Результат` везде ставь `—`.
 
    Пример:
 
-   | url | regular_price | sale_price | promo_code | Результат |
+   | Товар | Обычная цена | Цена со скидкой | Промокод | Результат |
    |---|---|---|---|---|
-   | https://www.dermstore.com/p/…/11524820/ | $36.00 | — | — | ↓ $1.00 |
-   | https://www.lookfantastic.com/p/…/15914075/ | $40.65 | $30.49 | — | ↓ $10.16 |
+   | [Alterna Caviar Conditioner 8.5oz (Dermstore)](https://www.dermstore.com/p/alterna-caviar-anti-aging-replenishing-moisture-conditioner-8.5oz/11524820/) | $36.00 | — | — | ↓ $1.00 |
+
+   Названия колонок в таблице для пользователя — русские; в файле `YYYY-MM-DD.json` остаются технические имена полей (`url`, `regular_price`, `sale_price`, `promo_code`).
 
 ## Формат таблицы прогона (для сохранения в файл)
 
